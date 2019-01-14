@@ -5,7 +5,7 @@ contract DappToken {
     string public name = "Dapps";
 
     string public symbol = "DAPP";
-
+ 
     string public standard = "Dapps v1.0";
 
     uint256 public totalSupply;
