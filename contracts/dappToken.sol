@@ -12,8 +12,33 @@ contract DappToken {
 
     mapping(address => uint256) public balanceOf;
 
+    //emit event upon successfull transfers
+    event Transfer(
+        address indexed _from, 
+        address indexed _to, 
+        uint256 _value
+    );
+
     constructor (uint256 _initialSupply) public {
         totalSupply = _initialSupply;
         balanceOf[msg.sender] = _initialSupply;
+    }
+
+    function transfer(address _to, uint256 _value) public returns (bool success){
+        success = false; 
+        uint256 senderBalance = balanceOf[msg.sender];
+
+        //ensure sender has enough tokens
+        require(_value <= senderBalance, "insufficient funds!");
+
+        //withdraw tokens from sender
+        balanceOf[msg.sender] -= _value;
+
+        //deposit tokens to receiver
+        balanceOf[_to] += _value;
+
+        emit Transfer(msg.sender, _to, _value);
+
+        return success;
     }
 }

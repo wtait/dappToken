@@ -30,6 +30,18 @@ contract('DappToken', function (accounts) {
         });
     });
 
+    it('transfers tokens', function () {
 
+        // transfer
+        // Transfers _value amount of tokens to address _to, and MUST fire the Transfer event.The function SHOULD throw if the _from account balance does not have enough tokens to spend.
+
+        // Note Transfers of 0 values MUST be treated as normal transfers and fire the Transfer event.
+
+        // function transfer(address _to, uint256 _value) public returns(bool success)
+        return DappToken.deployed().then(function(instance) {
+            tokenInstance = instance;
+            return 
+        })
+    })
 
 })
