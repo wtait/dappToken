@@ -9,8 +9,11 @@ contract('DappToken', function(accounts) {
         }).then(function(totalSupply) {
             console.log(totalSupply);
             assert.equal(totalSupply.toNumber(), 1000000, "Sets token total supply at one million");
+            return tokenInstance.balanceOf(accounts[0]);
+        }).then(function(adminBalance) {
+            assert.equal(adminBalance.toNumber(), 1000000, "Allocates total supply of initial coins to admin");
         });
-    })
+    });
 
 
 
