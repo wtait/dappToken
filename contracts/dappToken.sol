@@ -25,20 +25,20 @@ contract DappToken {
     }
 
     function transfer(address _to, uint256 _value) public returns (bool success){
-        success = false; 
-        uint256 senderBalance = balanceOf[msg.sender];
+        //success = false; 
+        //uint256 senderBalance = balanceOf[msg.sender];
 
         //ensure sender has enough tokens
-        require(_value <= senderBalance, "insufficient funds!");
+        require(_value <= balanceOf[msg.sender], "insufficient funds");
 
         //withdraw tokens from sender
-        balanceOf[msg.sender] -= _value;
+        //balanceOf[msg.sender] -= _value;
 
         //deposit tokens to receiver
-        balanceOf[_to] += _value;
+        //balanceOf[_to] += _value;
 
-        emit Transfer(msg.sender, _to, _value);
+        //emit Transfer(msg.sender, _to, _value);
 
-        return success;
+        //return success;
     }
 }

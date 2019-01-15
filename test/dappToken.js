@@ -40,8 +40,11 @@ contract('DappToken', function (accounts) {
         // function transfer(address _to, uint256 _value) public returns(bool success)
         return DappToken.deployed().then(function(instance) {
             tokenInstance = instance;
-            return 
-        })
-    })
+            //require transfer sender has sufficient funds
+            return tokenInstance.transfer.call(accounts[1], 10000001);
+        }).then(assert.fail).catch(function(error) {
+            assert(error.message.indexOf('revert') >= 0, 'error message must contain revert');
+        });
+    });
 
 })
