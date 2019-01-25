@@ -19,6 +19,12 @@ contract DappToken {
         uint256 _value
     );
 
+    event Approve(
+        address indexed _owner,
+        address indexed _spender, 
+        uint256 _value
+    );
+
     constructor (uint256 _initialSupply) public {
         totalSupply = _initialSupply;
         balanceOf[msg.sender] = _initialSupply;
@@ -43,7 +49,8 @@ contract DappToken {
     }
 
     function approve (address _spender, uint256 _value) public returns (bool success) {
-        //
+        
+        return true;
     }
 
 }
