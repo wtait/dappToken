@@ -26,8 +26,6 @@ contract DappToken {
 
     function transfer(address _to, uint256 _value) public returns (bool success){ 
 
-        //uint256 senderBalance = balanceOf[msg.sender];
-
         //ensure sender has enough tokens
         require(_value <= balanceOf[msg.sender], "insufficient funds");
 
@@ -37,8 +35,15 @@ contract DappToken {
         //deposit tokens to receiver
         balanceOf[_to] += _value;
 
+        //fire transfer event
         emit Transfer(msg.sender, _to, _value);
 
+        //return boolean
         return true;
     }
+
+    function approve (address _spender, uint256 _value) public returns (bool success) {
+        //
+    }
+
 }
