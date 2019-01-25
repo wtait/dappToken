@@ -45,7 +45,12 @@ contract('DappToken', function (accounts) {
         }).then(assert.fail).catch(function(error) {
             assert(error.message.indexOf('revert') >= 0, 'error message must contain revert');
             return tokenInstance.transfer(accounts[1], 500001, {from: accounts[0]});
-        }).then(function(reciept) {
+        }).then(function(receipt) {
+            assert.equal(receipt.logs.length, 1, 'event logs exist');
+            assert.equal(receipt.logs[0].event, 'Transfer', 'the transfer event fired');
+            assert.equal(receipt.logs[0].args._from, accounts[0], 'logs the address of the sender');
+            assert.equal(receipt.logs[0].args._to, accounts[1], 'logs the address of the receiver');
+            assert.equal(receipt.logs[0].args._value, 500001, 'logs the correct transfer amount');
             return tokenInstance.balanceOf(accounts[1]);
         }).then(function(balanceReceiver) {
             assert.equal(balanceReceiver.toNumber(), 500001, 'recepient receives correct funds');
