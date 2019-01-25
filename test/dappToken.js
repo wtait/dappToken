@@ -45,6 +45,9 @@ contract('DappToken', function (accounts) {
         }).then(assert.fail).catch(function(error) {
             assert(error.message.indexOf('revert') >= 0, 'error message must contain revert');
             return tokenInstance.transfer(accounts[1], 500001, {from: accounts[0]});
+        }).then(function(success) {
+            assert.equal(success, true, 'transfer function returns true (boolean) upon successful transfer');
+            return tokenInstance.transfer(accounts[1], 500001, { from: accounts[0] });
         }).then(function(receipt) {
             assert.equal(receipt.logs.length, 1, 'event logs exist');
             assert.equal(receipt.logs[0].event, 'Transfer', 'the transfer event fired');
