@@ -37,7 +37,7 @@ contract DappToken {
         //deposit tokens to receiver
         balanceOf[_to] += _value;
 
-        //emit Transfer(msg.sender, _to, _value);
+        emit Transfer(msg.sender, _to, _value);
 
         //return success;
     }
