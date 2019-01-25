@@ -19,7 +19,7 @@ contract DappToken {
         uint256 _value
     );
 
-    event Approve(
+    event Approval(
         address indexed _owner,
         address indexed _spender, 
         uint256 _value
@@ -49,7 +49,9 @@ contract DappToken {
     }
 
     function approve (address _spender, uint256 _value) public returns (bool success) {
-        
+        //fire Approve event
+        emit Approval(msg.sender, _spender, _value);
+
         return true;
     }
 

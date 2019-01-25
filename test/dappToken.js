@@ -22,7 +22,6 @@ contract('DappToken', function (accounts) {
             tokenInstance = instance;
             return tokenInstance.totalSupply();
         }).then(function (totalSupply) {
-            console.log(totalSupply);
             assert.equal(totalSupply.toNumber(), 1000000, "Sets token total supply at one million");
             return tokenInstance.balanceOf(accounts[0]);
         }).then(function (adminBalance) {
@@ -69,6 +68,13 @@ contract('DappToken', function (accounts) {
             return tokenInstance.approve.call(accounts[1], 100);
         }).then(function(success) {
             assert.equal(success, true, 'approve function returns true upon successful call'); 
+            return tokenInstance.approve(accounts[1], 100);
+        }).then(function(receipt) {
+            assert.equal(receipt.logs.length, 1, 'event logs exist');
+            assert.equal(receipt.logs[0].event, 'Approval', 'the Approval event fired');
+            assert.equal(receipt.logs[0].args._owner, accounts[0], 'logs the address of the owner');
+            assert.equal(receipt.logs[0].args._spender, accounts[1], 'logs the address of the spender');
+            assert.equal(receipt.logs[0].args._value, 100, 'logs the correct approval amount');
         })
     })
 
