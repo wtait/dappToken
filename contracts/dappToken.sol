@@ -24,8 +24,8 @@ contract DappToken {
         balanceOf[msg.sender] = _initialSupply;
     }
 
-    function transfer(address _to, uint256 _value) public returns (bool success){
-        //success = false; 
+    function transfer(address _to, uint256 _value) public returns (bool success){ 
+
         //uint256 senderBalance = balanceOf[msg.sender];
 
         //ensure sender has enough tokens
@@ -39,6 +39,6 @@ contract DappToken {
 
         emit Transfer(msg.sender, _to, _value);
 
-        //return success;
+        return true;
     }
 }
