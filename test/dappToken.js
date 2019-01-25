@@ -60,7 +60,16 @@ contract('DappToken', function (accounts) {
             return tokenInstance.balanceOf(accounts[0]);
         }).then(function(balanceSender) {
             assert.equal(balanceSender.toNumber(), 499999, 'sender is debited correct amount');
-        })
+        });
     });
+
+    it('approves transactions for delegate transfers', function() {
+        return DappToken.deployed().then(function(instance) {
+            tokenInstance = instance;
+            return tokenInstance.approve.call(accounts[1], 100);
+        }).then(function(success) {
+            assert.equal(success, true, 'approve function returns true upon successful call'); 
+        })
+    })
 
 })
