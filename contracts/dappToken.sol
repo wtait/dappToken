@@ -32,10 +32,10 @@ contract DappToken {
         require(_value <= balanceOf[msg.sender], "insufficient funds");
 
         //withdraw tokens from sender
-        //balanceOf[msg.sender] -= _value;
+        balanceOf[msg.sender] -= _value;
 
         //deposit tokens to receiver
-        //balanceOf[_to] += _value;
+        balanceOf[_to] += _value;
 
         //emit Transfer(msg.sender, _to, _value);
 
