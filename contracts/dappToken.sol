@@ -50,6 +50,8 @@ contract DappToken {
     }
 
     function approve (address _spender, uint256 _value) public returns (bool success) {
+        allowance[msg.sender][_spender] = _value;
+       
         //fire Approve event
         emit Approval(msg.sender, _spender, _value);
 
