@@ -75,7 +75,10 @@ contract('DappToken', function (accounts) {
             assert.equal(receipt.logs[0].args._owner, accounts[0], 'logs the address of the owner');
             assert.equal(receipt.logs[0].args._spender, accounts[1], 'logs the address of the spender');
             assert.equal(receipt.logs[0].args._value, 100, 'logs the correct approval amount');
-        })
-    })
+            return tokenInstance.allowance(accounts[0], accounts[1]);
+        }).then(function (allowance) {
+            assert.equal(allowance, 100, 'allowance stores the authorized amount for delegated transfer');
+        });
+    });
 
 })
