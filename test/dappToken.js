@@ -81,4 +81,13 @@ contract('DappToken', function (accounts) {
         });
     });
 
+
+    it('enables delegated transfers using transferFrom', function() {
+        return DappToken.deployed().then(function (instance) {
+            tokenInstance = instance;
+            return tokenInstance.transferFrom.call(accounts[0], accounts[1], 100);
+        }).then(function(success) {
+            assert.equal(success, true, 'transferFrom returns true upon success');
+        });
+    });
 })
