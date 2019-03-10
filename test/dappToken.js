@@ -85,9 +85,19 @@ contract('DappToken', function (accounts) {
     it('enables delegated transfers using transferFrom', function() {
         return DappToken.deployed().then(function (instance) {
             tokenInstance = instance;
-            return tokenInstance.transferFrom.call(accounts[0], accounts[1], 100);
-        }).then(function(success) {
-            assert.equal(success, true, 'transferFrom returns true upon success');
-        });
+            fromAccount = accounts[2];
+            toAccount = accounts[3];
+            spendingAccount = accounts[4];
+            return tokenInstance.transfer(fromAccount, 100, {from: accounts[0]});
+            //return tokenInstance.transferFrom.call(accounts[0], accounts[1], 100);
+        }).then(function(receipt) {
+            // assert.equal(success, true, 'transferFrom returns true upon success');
+            return tokenInstance.approve(spendingAccount, 10, {from: fromAccount});
+        }).then(function(receipt) {
+            //try to transfer more than sender's balance
+            tokenInstance.transferFrom(fromAccount, toAccount, 101, {from: spendingAccount});
+        }).then(assert.fail).catch(function(error) {
+            assert(error.message.indexOf('revert') >= 0, 'transfer value greater than account balance')
+        })
     });
 })
